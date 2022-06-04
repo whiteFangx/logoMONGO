@@ -12,8 +12,7 @@ db = MongoClient(DB)['logo']['Logo']
 routes = web.RouteTableDef()
 
 async def _get_iamges():
-    list = choice([m['url'] for m in db.find()])
-    return list
+    return choice([m['url'] for m in db.find()])
    
 
 
@@ -25,8 +24,7 @@ async def base_page(r):
 
 @routes.get("/images")
 async def images(r):
-    response_obj = { 'status' : 'success' }
-    response_obj['images'] = await _get_iamges()
+    response_obj = {'status': 'success', 'images': await _get_iamges()}
     return web.Response(text=json.dumps(response_obj))
 
 async def start_server():
